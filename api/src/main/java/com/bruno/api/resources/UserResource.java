@@ -1,6 +1,7 @@
 package com.bruno.api.resources;
 
 import com.bruno.api.dto.UserDTO;
+import com.bruno.api.entities.Post;
 import com.bruno.api.entities.User;
 import com.bruno.api.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +55,11 @@ public class UserResource {
         obj.setId(id);
         obj = userService.update(obj);
         return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(value="/{id}/posts", method=RequestMethod.GET)
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User obj = userService.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 }
