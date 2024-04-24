@@ -1,5 +1,6 @@
 package com.bruno.api.config;
 
+import com.bruno.api.dto.AuthorDTO;
 import com.bruno.api.entities.Post;
 import com.bruno.api.entities.User;
 import com.bruno.api.repositories.PostRepository;
@@ -34,10 +35,11 @@ public class Instantiation implements CommandLineRunner {
         User alex = new User(null, "Alex Green", "alex@gmail.com");
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
 
-        Post post1 = new Post(null, sdf.parse("21/03/2023"), "My Trip", "Trip to Australia", maria);
-        Post post2 = new Post(null, sdf.parse("23/03/2023"), "Hello world", "Good day", maria);
-
         userRepository.saveAll(Arrays.asList(maria, alex, bob));
+
+        Post post1 = new Post(null, sdf.parse("21/03/2023"), "My Trip", "Trip to Australia", new AuthorDTO(maria));
+        Post post2 = new Post(null, sdf.parse("23/03/2023"), "Hello world", "Good day", new AuthorDTO(maria));
+
         postRepository.saveAll(Arrays.asList(post1, post2));
     }
 }
